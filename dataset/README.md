@@ -4,16 +4,21 @@
 
 ```
 dataset/
-├── README.md <- you are here
-└── sample/ <- 2 LIDC-IDRI scans bundled for smoke testing
- ├── ct/ <- CT volumes (NIfTI .nii.gz)
- └── masks/ <- ground-truth nodule masks
+├── README.md            <- you are here
+└── sample/              <- bundled smoke-test data (~71 MB total)
+    ├── ct/              <- 2 CT volumes (NIfTI .nii.gz)
+    ├── masks/           <- 2 ground-truth nodule masks
+    └── png_slices/      <- 13 axial PNG slices around the nodule
 ```
 
-The two bundled scans (`LIDC-IDRI-0006_3000559` and
-`LIDC-IDRI-0006_3000561`, ≈70 MB total) are provided **only so reviewers
-can run the Streamlit deployment app end-to-end without downloading the
-full dataset**. They are **not** sufficient to train the model.
+The two bundled scans (`LIDC-IDRI-0006_3000563` and
+`LIDC-IDRI-0006_3000567`) **both contain confirmed nodules**, so the
+deployment app actually has something to find. The 13 PNGs in
+`png_slices/` are a lung-windowed export of the nodule region from the
+first scan, named in slice order so multi-file upload preserves
+anatomy. All of this is provided **only so reviewers can demo the app
+end-to-end without downloading the full LIDC dataset** -- it is **not**
+sufficient to train the model.
 
 ## Smoke-test with the bundled sample
 
@@ -22,8 +27,15 @@ full dataset**. They are **not** sufficient to train the model.
 py -m streamlit run app.py
 ```
 
-In the upload widget, drag-and-drop
-`dataset/sample/ct/LIDC-IDRI-0006_3000559.nii.gz`. The app will run
+In the upload widget, choose any of the bundled samples:
+
+- **Fastest demo** -- drag-and-drop a single PNG from
+  `dataset/sample/png_slices/` (e.g. `slice_07.png` is the nodule
+  centroid).
+- **Multi-slice PNG demo** -- drop the entire `png_slices/` folder so
+  the 13 PNGs are stacked into a small 3D volume.
+- **Full 3D NIfTI demo** -- drag-and-drop
+  `dataset/sample/ct/LIDC-IDRI-0006_3000563.nii.gz`. The app will run
 sliding-window inference and render the four-panel viewer. (Without a
 trained checkpoint at `checkpoints/lung_cancer_attention_unet/best_model.pth`
 the predictions are meaningless — see the main `README.md` to train.)
