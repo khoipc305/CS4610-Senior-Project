@@ -3,9 +3,9 @@
 ## Project Overview
 This project builds upon the Fall 2025 Senior Project to significantly improve lung cancer nodule detection and segmentation performance. Key enhancements address the limitations identified in the baseline model (Dice: 0.54).
 
-**Student:** Khoi Nguyen Pham  
-**Advisor:** Professor Hao Ji  
-**Course:** CS4620 - Spring 2026  
+**Student:** Khoi Nguyen Pham
+**Advisor:** Professor Hao Ji
+**Course:** CS4620 - Spring 2026
 **Base Project:** Fall 2025 Lung Cancer Detection (3D U-Net)
 
 ## Improvements Over Fall Project
@@ -20,85 +20,85 @@ This project builds upon the Fall 2025 Senior Project to significantly improve l
 
 ### Spring Enhancements
 
-#### 1. **Advanced Model Architecture** 🧠
-- ✨ **Attention U-Net:** Self-attention and channel attention mechanisms
-- ✨ **Deep Supervision:** Multi-scale loss for better feature learning
-- ✨ **Residual Connections:** Improved gradient flow
-- ✨ **Larger capacity:** More feature channels [32, 64, 128, 256, 512]
+#### 1. **Advanced Model Architecture**
+- **Attention U-Net:** Self-attention and channel attention mechanisms
+- **Deep Supervision:** Multi-scale loss for better feature learning
+- **Residual Connections:** Improved gradient flow
+- **Larger capacity:** More feature channels [32, 64, 128, 256, 512]
 
-#### 2. **Improved Data Processing** 📊
-- ✨ **Larger patches:** 128×128×128 (vs 96×96×96) for more context
-- ✨ **Advanced augmentation:** Elastic deformations, intensity shifts, noise
-- ✨ **Smart sampling:** Balanced positive/negative patches with hard mining
-- ✨ **Better normalization:** Adaptive windowing for lung tissue
+#### 2. **Improved Data Processing**
+- **Larger patches:** 128×128×128 (vs 96×96×96) for more context
+- **Advanced augmentation:** Elastic deformations, intensity shifts, noise
+- **Smart sampling:** Balanced positive/negative patches with hard mining
+- **Better normalization:** Adaptive windowing for lung tissue
 
-#### 3. **Advanced Loss Functions** 🎯
-- ✨ **Focal Loss:** Addresses class imbalance by focusing on hard examples
-- ✨ **Tversky Loss:** Better for handling imbalanced segmentation
-- ✨ **Combined Loss:** Focal + Dice + BCE with optimal weights
-- ✨ **Deep supervision:** Auxiliary losses at multiple scales
+#### 3. **Advanced Loss Functions**
+- **Focal Loss:** Addresses class imbalance by focusing on hard examples
+- **Tversky Loss:** Better for handling imbalanced segmentation
+- **Combined Loss:** Focal + Dice + BCE with optimal weights
+- **Deep supervision:** Auxiliary losses at multiple scales
 
-#### 4. **Training Optimizations** ⚡
-- ✨ **GPU Support:** CUDA-enabled for 10-20x faster training
-- ✨ **Mixed Precision:** FP16 training for memory efficiency
-- ✨ **Larger batches:** 4-8 samples (vs 2) with gradient accumulation
-- ✨ **Advanced scheduler:** CosineAnnealingWarmRestarts
-- ✨ **Early stopping:** Prevents overfitting
+#### 4. **Training Optimizations**
+- **GPU Support:** CUDA-enabled for 10-20x faster training
+- **Mixed Precision:** FP16 training for memory efficiency
+- **Larger batches:** 4-8 samples (vs 2) with gradient accumulation
+- **Advanced scheduler:** CosineAnnealingWarmRestarts
+- **Early stopping:** Prevents overfitting
 
-#### 5. **Comprehensive Evaluation** 📈
-- ✨ **Cross-validation:** 5-fold CV for robust performance estimates
-- ✨ **Multiple metrics:** Dice, IoU, Precision, Recall, Hausdorff Distance
-- ✨ **Statistical analysis:** Confidence intervals, significance tests
-- ✨ **Visualization:** 3D interactive predictions, attention maps
+#### 5. **Comprehensive Evaluation**
+- **Cross-validation:** 5-fold CV for robust performance estimates
+- **Multiple metrics:** Dice, IoU, Precision, Recall, Hausdorff Distance
+- **Statistical analysis:** Confidence intervals, significance tests
+- **Visualization:** 3D interactive predictions, attention maps
 
-#### 6. **Additional Features** 🚀
-- ✨ **TensorBoard integration:** Real-time monitoring
-- ✨ **Model ensemble:** Combine multiple models for better performance
-- ✨ **Post-processing:** Connected components, morphological operations
-- ✨ **Web interface:** Gradio app for easy inference
+#### 6. **Additional Features**
+- **TensorBoard integration:** Real-time monitoring
+- **Model ensemble:** Combine multiple models for better performance
+- **Post-processing:** Connected components, morphological operations
+- **Web interface:** Gradio app for easy inference
 
 ## Project Structure
 
 ```
 d:\Spring project\
-├── README.md                          # This file
-├── requirements.txt                   # Python dependencies
-├── config/                            # Configuration files
-│   ├── config_baseline.yaml          # Baseline configuration
-│   └── config_advanced.yaml          # Advanced configuration
-├── src/                               # Source code
-│   ├── models/                       # Model architectures
-│   │   ├── attention_unet.py         # Attention U-Net
-│   │   ├── deep_supervision.py       # Deep supervision module
-│   │   └── model_factory.py          # Model builder
-│   ├── data/                         # Data processing
-│   │   ├── dataset.py                # Enhanced dataset class
-│   │   ├── transforms.py             # Advanced augmentations
-│   │   └── preprocessing.py          # Data preprocessing
-│   ├── training/                     # Training utilities
-│   │   ├── trainer.py                # Main training loop
-│   │   ├── losses.py                 # Custom loss functions
-│   │   └── metrics.py                # Evaluation metrics
-│   ├── utils/                        # Utilities
-│   │   ├── visualization.py          # Plotting and viz
-│   │   └── logger.py                 # Logging utilities
-│   └── inference/                    # Inference tools
-│       ├── predict.py                # Single prediction
-│       └── ensemble.py               # Ensemble inference
-├── notebooks/                         # Jupyter notebooks
-│   ├── 01_data_exploration.ipynb     # Data analysis
-│   ├── 02_model_training.ipynb       # Training experiments
-│   └── 03_evaluation.ipynb           # Results analysis
-├── scripts/                           # Standalone scripts
-│   ├── train.py                      # Main training script
-│   ├── evaluate.py                   # Evaluation script
-│   └── cross_validate.py             # Cross-validation
-├── experiments/                       # Experiment outputs
-│   └── runs/                         # TensorBoard logs
-├── checkpoints/                       # Saved models
-└── docs/                             # Documentation
-    ├── METHODOLOGY.md                # Technical details
-    └── RESULTS.md                    # Results and analysis
+├── README.md # This file
+├── requirements.txt # Python dependencies
+├── config/ # Configuration files
+│ ├── config_baseline.yaml # Baseline configuration
+│ └── config_advanced.yaml # Advanced configuration
+├── src/ # Source code
+│ ├── models/ # Model architectures
+│ │ ├── attention_unet.py # Attention U-Net
+│ │ ├── deep_supervision.py # Deep supervision module
+│ │ └── model_factory.py # Model builder
+│ ├── data/ # Data processing
+│ │ ├── dataset.py # Enhanced dataset class
+│ │ ├── transforms.py # Advanced augmentations
+│ │ └── preprocessing.py # Data preprocessing
+│ ├── training/ # Training utilities
+│ │ ├── trainer.py # Main training loop
+│ │ ├── losses.py # Custom loss functions
+│ │ └── metrics.py # Evaluation metrics
+│ ├── utils/ # Utilities
+│ │ ├── visualization.py # Plotting and viz
+│ │ └── logger.py # Logging utilities
+│ └── inference/ # Inference tools
+│ ├── predict.py # Single prediction
+│ └── ensemble.py # Ensemble inference
+├── notebooks/ # Jupyter notebooks
+│ ├── 01_data_exploration.ipynb # Data analysis
+│ ├── 02_model_training.ipynb # Training experiments
+│ └── 03_evaluation.ipynb # Results analysis
+├── scripts/ # Standalone scripts
+│ ├── train.py # Main training script
+│ ├── evaluate.py # Evaluation script
+│ └── cross_validate.py # Cross-validation
+├── experiments/ # Experiment outputs
+│ └── runs/ # TensorBoard logs
+├── checkpoints/ # Saved models
+└── docs/ # Documentation
+ ├── METHODOLOGY.md # Technical details
+ └── RESULTS.md # Results and analysis
 ```
 
 ## Installation & Setup
@@ -129,13 +129,13 @@ Link to Fall project data:
 
 ## Alignment with Progress Report 1
 
-**✅ This implementation includes ALL components mentioned in your Progress Report 1:**
+** This implementation includes ALL components mentioned in your Progress Report 1:**
 
-1. ✅ **Statistical Baseline Models** - Logistic regression, Random Forest, SVM
-2. ✅ **Deep Learning CNNs** - Attention U-Net, Deep Supervision
-3. ✅ **Transfer Learning** - ResNet, DenseNet with fine-tuning strategies
-4. ✅ **Evaluation Metrics** - Sensitivity, Specificity, ROC-AUC, Confusion Matrix
-5. ✅ **Model Interpretability** - Grad-CAM, attention visualization
+1. **Statistical Baseline Models** - Logistic regression, Random Forest, SVM
+2. **Deep Learning CNNs** - Attention U-Net, Deep Supervision
+3. **Transfer Learning** - ResNet, DenseNet with fine-tuning strategies
+4. **Evaluation Metrics** - Sensitivity, Specificity, ROC-AUC, Confusion Matrix
+5. **Model Interpretability** - Grad-CAM, attention visualization
 
 See `ALIGNMENT_WITH_PROGRESS_REPORT.md` for detailed mapping.
 
@@ -176,9 +176,9 @@ python scripts/evaluate.py --model checkpoints/best_model.pth --data_dir "D:/Fal
 from src.inference.predict import predict_single
 
 result = predict_single(
-    ct_path="path/to/ct.nii.gz",
-    model_path="checkpoints/best_model.pth",
-    output_dir="predictions"
+ ct_path="path/to/ct.nii.gz",
+ model_path="checkpoints/best_model.pth",
+ output_dir="predictions"
 )
 ```
 
@@ -224,13 +224,13 @@ result = predict_single(
 
 ## Timeline (Spring 2026)
 
-- ✅ **Week 1-2:** Setup and baseline reimplementation
-- 🔄 **Week 3-4:** Implement attention mechanisms and focal loss
-- 📅 **Week 5-6:** Advanced augmentation and data processing
-- 📅 **Week 7-8:** GPU training and hyperparameter tuning
-- 📅 **Week 9-10:** Cross-validation and ensemble methods
-- 📅 **Week 11-12:** Evaluation, visualization, and documentation
-- 📅 **Week 13-14:** Final report and presentation preparation
+- **Week 1-2:** Setup and baseline reimplementation
+- **Week 3-4:** Implement attention mechanisms and focal loss
+- **Week 5-6:** Advanced augmentation and data processing
+- **Week 7-8:** GPU training and hyperparameter tuning
+- **Week 9-10:** Cross-validation and ensemble methods
+- **Week 11-12:** Evaluation, visualization, and documentation
+- **Week 13-14:** Final report and presentation preparation
 
 ## References
 
@@ -251,5 +251,5 @@ This project builds upon the Fall 2025 Senior Project baseline. Special thanks t
 
 ---
 
-**Last Updated:** April 17, 2026  
-**Status:** 🚀 Active Development
+**Last Updated:** April 17, 2026
+**Status:** Active Development

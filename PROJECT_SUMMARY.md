@@ -1,43 +1,43 @@
 # Project Summary - Enhanced Lung Cancer Detection (Spring 2026)
 
-## 🎯 Project Overview
+## Project Overview
 
 This Spring 2026 project builds upon your Fall 2025 lung cancer nodule detection system, implementing significant improvements to boost performance from **Dice: 0.54 → Target: 0.70-0.75** (+30-40%).
 
-**Student:** Khoi Nguyen Pham  
-**Course:** CS4620 - Senior Project Continuation  
-**Advisor:** Professor Hao Ji  
+**Student:** Khoi Nguyen Pham
+**Course:** CS4620 - Senior Project Continuation
+**Advisor:** Professor Hao Ji
 **Date:** April 17, 2026
 
 ---
 
-## 📊 Fall 2025 Baseline Results
+## Fall 2025 Baseline Results
 
 Your Fall project achieved:
-- ✅ **Dice Score:** 0.5415 (moderate performance)
-- ✅ **Model:** 3D U-Net with 4.8M parameters
-- ✅ **Dataset:** 61 LIDC-IDRI CT scans (48 train, 13 val)
-- ✅ **Training:** 50 epochs on CPU (4.33 hours)
-- ⚠️ **Limitations:** Class imbalance, small patches, no attention mechanism
+- **Dice Score:** 0.5415 (moderate performance)
+- **Model:** 3D U-Net with 4.8M parameters
+- **Dataset:** 61 LIDC-IDRI CT scans (48 train, 13 val)
+- **Training:** 50 epochs on CPU (4.33 hours)
+- **Limitations:** Class imbalance, small patches, no attention mechanism
 
 ---
 
-## 🚀 Spring 2026 Enhancements
+## Spring 2026 Enhancements
 
 ### 1. **Advanced Model Architecture** (NEW)
-- ✨ **Attention U-Net** with spatial/channel attention
-- ✨ **Deep supervision** for multi-scale learning
-- ✨ **Larger capacity:** 19M parameters (4x increase)
-- ✨ **Better feature extraction:** [32, 64, 128, 256, 512] channels
+- **Attention U-Net** with spatial/channel attention
+- **Deep supervision** for multi-scale learning
+- **Larger capacity:** 19M parameters (4x increase)
+- **Better feature extraction:** [32, 64, 128, 256, 512] channels
 
 **Files:**
 - `src/models/attention_unet.py` - Attention mechanisms implementation
 - Configuration in `config/config_advanced.yaml`
 
 ### 2. **Advanced Loss Functions** (NEW)
-- ✨ **Focal Loss:** Tackles class imbalance (γ=2.0, α=0.75)
-- ✨ **Tversky Loss:** FP/FN trade-off control
-- ✨ **Combined Loss:** Focal (50%) + Dice (30%) + CE (20%)
+- **Focal Loss:** Tackles class imbalance (γ=2.0, α=0.75)
+- **Tversky Loss:** FP/FN trade-off control
+- **Combined Loss:** Focal (50%) + Dice (30%) + CE (20%)
 
 **Impact:** Focuses on hard examples (nodule boundaries)
 
@@ -45,85 +45,85 @@ Your Fall project achieved:
 - `src/training/losses.py` - Custom loss implementations
 
 ### 3. **Enhanced Data Processing** (NEW)
-- ✨ **Larger patches:** 128×128×128 (vs 96×96×96) for more context
-- ✨ **Smart sampling:** 2:1 positive/negative ratio
-- ✨ **Advanced augmentation:** Elastic deformations, noise, intensity shifts
-- ✨ **Hard negative mining:** Focus on difficult examples
+- **Larger patches:** 128×128×128 (vs 96×96×96) for more context
+- **Smart sampling:** 2:1 positive/negative ratio
+- **Advanced augmentation:** Elastic deformations, noise, intensity shifts
+- **Hard negative mining:** Focus on difficult examples
 
 **Files:**
 - `src/data/dataset.py` - Enhanced dataset class
 - `src/data/transforms.py` - Advanced augmentation pipeline
 
 ### 4. **Training Optimizations** (NEW)
-- ✨ **GPU support** with mixed precision (FP16) - 10-20x faster
-- ✨ **Larger batch sizes:** 4-8 (vs 2) with gradient accumulation
-- ✨ **Better scheduler:** CosineAnnealingWarmRestarts
-- ✨ **Early stopping:** Prevents overfitting
+- **GPU support** with mixed precision (FP16) - 10-20x faster
+- **Larger batch sizes:** 4-8 (vs 2) with gradient accumulation
+- **Better scheduler:** CosineAnnealingWarmRestarts
+- **Early stopping:** Prevents overfitting
 
 **Files:**
 - `scripts/train.py` - Main training script
 
 ### 5. **Comprehensive Evaluation** (NEW)
-- ✨ **Multiple metrics:** Dice, IoU, Sensitivity, Specificity, Precision
-- ✨ **Distance metrics:** Hausdorff Distance, Average Surface Distance
-- ✨ **Statistical analysis:** Mean, std, confidence intervals
-- ✨ **Visualization:** Distribution plots, training curves
+- **Multiple metrics:** Dice, IoU, Sensitivity, Specificity, Precision
+- **Distance metrics:** Hausdorff Distance, Average Surface Distance
+- **Statistical analysis:** Mean, std, confidence intervals
+- **Visualization:** Distribution plots, training curves
 
 **Files:**
 - `src/training/metrics.py` - Metrics implementation
 - `scripts/evaluate.py` - Evaluation script
 
 ### 6. **Professional Infrastructure** (NEW)
-- ✨ **TensorBoard integration:** Real-time monitoring
-- ✨ **YAML configuration:** Easy experimentation
-- ✨ **Modular codebase:** Clean, maintainable structure
-- ✨ **Comprehensive docs:** Quick start, methodology, setup
+- **TensorBoard integration:** Real-time monitoring
+- **YAML configuration:** Easy experimentation
+- **Modular codebase:** Clean, maintainable structure
+- **Comprehensive docs:** Quick start, methodology, setup
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 d:\Spring project\
-├── README.md                          # Main documentation
-├── SETUP_INSTRUCTIONS.md              # Installation guide
-├── PROJECT_SUMMARY.md                 # This file
-├── requirements.txt                   # Python dependencies
+├── README.md # Main documentation
+├── SETUP_INSTRUCTIONS.md # Installation guide
+├── PROJECT_SUMMARY.md # This file
+├── requirements.txt # Python dependencies
 │
-├── config/                            # Configuration files
-│   ├── config_advanced.yaml          # Enhanced model config
-│   └── config_baseline.yaml          # Baseline (Fall) config
+├── config/ # Configuration files
+│ ├── config_advanced.yaml # Enhanced model config
+│ └── config_baseline.yaml # Baseline (Fall) config
 │
-├── src/                               # Source code
-│   ├── models/
-│   │   └── attention_unet.py         # Attention U-Net
-│   ├── data/
-│   │   ├── dataset.py                # Enhanced dataset
-│   │   └── transforms.py             # Augmentations
-│   ├── training/
-│   │   ├── losses.py                 # Custom losses
-│   │   └── metrics.py                # Evaluation metrics
-│   ├── utils/                        # Utilities
-│   └── inference/                    # Inference tools
+├── src/ # Source code
+│ ├── models/
+│ │ └── attention_unet.py # Attention U-Net
+│ ├── data/
+│ │ ├── dataset.py # Enhanced dataset
+│ │ └── transforms.py # Augmentations
+│ ├── training/
+│ │ ├── losses.py # Custom losses
+│ │ └── metrics.py # Evaluation metrics
+│ ├── utils/ # Utilities
+│ └── inference/ # Inference tools
 │
-├── scripts/                           # Executable scripts
-│   ├── train.py                      # Main training
-│   └── evaluate.py                   # Evaluation
+├── scripts/ # Executable scripts
+│ ├── train.py # Main training
+│ └── evaluate.py # Evaluation
 │
-├── docs/                             # Documentation
-│   ├── QUICK_START.md               # Quick start guide
-│   └── METHODOLOGY.md               # Technical details
+├── docs/ # Documentation
+│ ├── QUICK_START.md # Quick start guide
+│ └── METHODOLOGY.md # Technical details
 │
-├── notebooks/                        # Jupyter notebooks (optional)
-├── experiments/                      # Training outputs
-└── checkpoints/                      # Saved models
+├── notebooks/ # Jupyter notebooks (optional)
+├── experiments/ # Training outputs
+└── checkpoints/ # Saved models
 ```
 
 **Total Files Created:** 30+ core files
 
 ---
 
-## 🎯 Expected Performance Improvements
+## Expected Performance Improvements
 
 | Metric | Fall (Baseline) | Spring (Target) | Improvement |
 |--------|----------------|-----------------|-------------|
@@ -135,7 +135,7 @@ d:\Spring project\
 
 ---
 
-## 🚦 Quick Start
+## Quick Start
 
 ### 1. Setup Environment (5 minutes)
 ```powershell
@@ -163,7 +163,7 @@ python scripts/evaluate.py --model checkpoints/lung_cancer_attention_unet/best_m
 
 ---
 
-## 📈 What Each Enhancement Contributes
+## What Each Enhancement Contributes
 
 | Enhancement | Expected Dice Gain |
 |-------------|-------------------|
@@ -173,12 +173,12 @@ python scripts/evaluate.py --model checkpoints/lung_cancer_attention_unet/best_m
 | Advanced augmentation | +2-3% |
 | Total | **+20-33%** |
 
-**Conservative estimate:** 0.54 → 0.65  
+**Conservative estimate:** 0.54 → 0.65
 **Optimistic estimate:** 0.54 → 0.75
 
 ---
 
-## 🔬 Key Innovations
+## Key Innovations
 
 ### 1. **Attention Mechanisms**
 Instead of treating all features equally, the model learns to focus on important regions (nodules).
@@ -194,7 +194,7 @@ Mixed precision training (FP16) provides 2-3x speedup with same accuracy.
 
 ---
 
-## 📚 Key Files for Your Report
+## Key Files for Your Report
 
 ### For Methodology Section:
 - `docs/METHODOLOGY.md` - Technical details
@@ -214,7 +214,7 @@ Mixed precision training (FP16) provides 2-3x speedup with same accuracy.
 
 ---
 
-## 🎓 For Your CS4620 Deliverables
+## For Your CS4620 Deliverables
 
 ### Progress Report 2 (Due: 04/17/2026) - TODAY!
 **What to include:**
@@ -241,7 +241,7 @@ Mixed precision training (FP16) provides 2-3x speedup with same accuracy.
 
 ---
 
-## 💡 Tips for Success
+## Tips for Success
 
 ### 1. Start with Baseline
 Run baseline config first to verify setup and compare results.
@@ -260,7 +260,7 @@ Keep notes on what works and what doesn't for your report.
 
 ---
 
-## 🔄 Comparison: Fall vs Spring
+## Comparison: Fall vs Spring
 
 | Aspect | Fall 2025 | Spring 2026 |
 |--------|-----------|-------------|
@@ -276,13 +276,13 @@ Keep notes on what works and what doesn't for your report.
 
 ---
 
-## 📞 Next Actions
+## Next Actions
 
 ### Immediate (This Week)
-1. ✅ Setup environment
-2. ⏳ Run baseline training (verify setup)
-3. ⏳ Run advanced training
-4. ⏳ Start monitoring results
+1. Setup environment
+2. Run baseline training (verify setup)
+3. Run advanced training
+4. Start monitoring results
 
 ### Short-term (Next 2 Weeks)
 1. Hyperparameter tuning
@@ -298,7 +298,7 @@ Keep notes on what works and what doesn't for your report.
 
 ---
 
-## 📖 Reference Papers for Your Report
+## Reference Papers for Your Report
 
 1. **Attention U-Net:** Oktay et al. (2018) - Attention U-Net: Learning Where to Look for the Pancreas
 2. **Focal Loss:** Lin et al. (2017) - Focal Loss for Dense Object Detection
@@ -308,7 +308,7 @@ Keep notes on what works and what doesn't for your report.
 
 ---
 
-## ✅ Checklist for Completion
+## Checklist for Completion
 
 ### Setup
 - [ ] Environment created and dependencies installed
@@ -336,16 +336,16 @@ Keep notes on what works and what doesn't for your report.
 
 ---
 
-## 🎉 Summary
+## Summary
 
 You now have a **complete, production-ready** lung cancer detection system with state-of-the-art improvements:
 
-✅ **30+ files** of well-structured code  
-✅ **Attention mechanisms** for better feature learning  
-✅ **Focal loss** for class imbalance  
-✅ **GPU acceleration** for fast training  
-✅ **Comprehensive metrics** for evaluation  
-✅ **Full documentation** for your report  
+ **30+ files** of well-structured code
+ **Attention mechanisms** for better feature learning
+ **Focal loss** for class imbalance
+ **GPU acceleration** for fast training
+ **Comprehensive metrics** for evaluation
+ **Full documentation** for your report
 
 **Expected outcome:** Dice score improvement from 0.54 to 0.70-0.75 (+30-40%)
 
@@ -353,10 +353,10 @@ You now have a **complete, production-ready** lung cancer detection system with 
 
 ---
 
-**Good luck with your Spring project! 🚀**
+**Good luck with your Spring project! **
 
 For questions or issues, refer to:
 - `SETUP_INSTRUCTIONS.md` - Setup help
-- `docs/QUICK_START.md` - Training guide  
+- `docs/QUICK_START.md` - Training guide
 - `docs/METHODOLOGY.md` - Technical details
 - `README.md` - Full documentation

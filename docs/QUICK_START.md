@@ -1,6 +1,6 @@
 # Quick Start Guide - Enhanced Lung Cancer Detection
 
-## 🚀 Quick Setup (5 minutes)
+## Quick Setup (5 minutes)
 
 ### 1. Install Dependencies
 
@@ -24,8 +24,8 @@ pip install -r requirements.txt
 The project uses data from your Fall project:
 ```
 D:\Fall Senior Project\LIDC-exact\
-├── ct\          # CT scans
-└── masks\       # Segmentation masks
+├── ct\ # CT scans
+└── masks\ # Segmentation masks
 
 D:\Fall Senior Project\LIDC-clean\
 ├── train_manifest.csv
@@ -53,7 +53,7 @@ python scripts/train.py --config config/config_baseline.yaml
 
 This replicates your Fall project setup for comparison.
 
-## 📊 Monitor Training
+## Monitor Training
 
 ### TensorBoard
 ```powershell
@@ -68,7 +68,7 @@ Training outputs are saved in:
 - `checkpoints/lung_cancer_attention_unet/training_history.csv` - Metrics
 - `checkpoints/lung_cancer_attention_unet/tensorboard/` - TensorBoard logs
 
-## 🎯 Expected Results
+## Expected Results
 
 ### Training Time
 - **GPU (RTX 3060 or better):** 1-2 hours for 100 epochs
@@ -81,13 +81,13 @@ Training outputs are saved in:
 | IoU | 0.37 | **0.55-0.60** |
 | Sensitivity | - | **0.75-0.80** |
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Out of Memory (GPU)
 Reduce batch size in config:
 ```yaml
 training:
-  batch_size: 2  # Instead of 4
+ batch_size: 2 # Instead of 4
 ```
 
 ### Slow Training
@@ -99,11 +99,11 @@ training:
 Check your PyTorch installation:
 ```python
 import torch
-print(torch.cuda.is_available())  # Should be True
+print(torch.cuda.is_available()) # Should be True
 print(torch.cuda.get_device_name(0))
 ```
 
-## 📝 Key Improvements Over Fall Project
+## Key Improvements Over Fall Project
 
 1. **Attention Mechanisms** - Model focuses on nodule regions
 2. **Focal Loss** - Handles class imbalance (nodules are small)
@@ -112,7 +112,7 @@ print(torch.cuda.get_device_name(0))
 5. **Deep Supervision** - Multi-scale learning
 6. **Advanced Metrics** - Hausdorff distance, sensitivity, etc.
 
-## 📚 Next Steps
+## Next Steps
 
 After training completes:
 1. Review results in `training_history.csv`
@@ -120,7 +120,7 @@ After training completes:
 3. Run evaluation script for detailed metrics
 4. Generate visualizations for your report
 
-## 🆘 Need Help?
+## Need Help?
 
 - Check `README.md` for full documentation
 - See `config/config_advanced.yaml` for all options

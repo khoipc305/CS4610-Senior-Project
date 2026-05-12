@@ -40,13 +40,13 @@ This opens a browser tab at `http://localhost:8501`. The app has six
 sections:
 
 1. **Input CT volume** — upload `.nii`, `.nii.gz`, or `.npy`, **or** click
-   *Use synthetic demo volume* for a built-in test case.
+ *Use synthetic demo volume* for a built-in test case.
 2. **Inference** — runs MONAI sliding-window 3D inference; reports nodule
-   count, mean confidence, and predicted-voxel total.
+ count, mean confidence, and predicted-voxel total.
 3. **Axial slice viewer** — slice slider with four panels: CT, predicted
-   mask overlay, probability heatmap, Grad-CAM overlay.
+ mask overlay, probability heatmap, Grad-CAM overlay.
 4. **Multi-plane view** — axial / sagittal / coronal mid-slices with mask
-   overlays.
+ overlays.
 5. **Detected nodules** — table of per-component voxel counts.
 6. **Download** — predicted mask as `.npy` and `.nii.gz`.
 
@@ -62,20 +62,20 @@ For the final video presentation:
 2. Open OBS Studio (or the PowerPoint screen recorder).
 3. Click *Use synthetic demo volume*, walk through the four panels.
 4. Adjust the threshold slider live to show sensitivity/specificity
-   trade-off.
+ trade-off.
 5. Show the download buttons.
 
 ## 5. Troubleshooting
 
 - **`ModuleNotFoundError: monai`** — run `pip install -r requirements.txt`.
 - **CUDA OOM** — switch the sidebar device to `cpu`, or lower the
-  ROI/sliding-window batch size in `src/inference/engine.py`.
+ ROI/sliding-window batch size in `src/inference/engine.py`.
 - **NIfTI orientation looks wrong** — `app.py` transposes from `[H, W, D]`
-  (typical NIfTI) to `[D, H, W]`. If your file is already `[D, H, W]`,
-  remove the `np.transpose` call in `_load_uploaded`.
+ (typical NIfTI) to `[D, H, W]`. If your file is already `[D, H, W]`,
+ remove the `np.transpose` call in `_load_uploaded`.
 - **No nodules shown but ground-truth has them (untrained model)** —
-  expected. Train via `python scripts/train.py --config config/config_advanced.yaml`
-  first, then point the sidebar at the resulting `best_model.pth`.
+ expected. Train via `python scripts/train.py --config config/config_advanced.yaml`
+ first, then point the sidebar at the resulting `best_model.pth`.
 
 ## 6. Files involved
 

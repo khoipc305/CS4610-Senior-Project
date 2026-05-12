@@ -4,10 +4,10 @@
 
 ```
 dataset/
-├── README.md            <- you are here
-└── sample/              <- 2 LIDC-IDRI scans bundled for smoke testing
-    ├── ct/              <- CT volumes (NIfTI .nii.gz)
-    └── masks/           <- ground-truth nodule masks
+├── README.md <- you are here
+└── sample/ <- 2 LIDC-IDRI scans bundled for smoke testing
+ ├── ct/ <- CT volumes (NIfTI .nii.gz)
+ └── masks/ <- ground-truth nodule masks
 ```
 
 The two bundled scans (`LIDC-IDRI-0006_3000559` and
@@ -39,8 +39,8 @@ size reasons. Two options to obtain it:
 1. Register a (free) account at <https://www.cancerimagingarchive.net/>.
 2. Download the *LIDC-IDRI* collection (DICOM, ~125 GB raw).
 3. Use the preprocessing pipeline in `src/data/` of this repo (or any
-   tool such as [pylidc](https://pylidc.github.io/)) to convert DICOM
-   to the `.nii.gz` layout shown in `sample/`.
+ tool such as [pylidc](https://pylidc.github.io/)) to convert DICOM
+ to the `.nii.gz` layout shown in `sample/`.
 
 ### Option B — Use the prepared NIfTI subset
 The 61-scan preprocessed subset used in CS4610 (Fall 2025) and CS4620
@@ -48,8 +48,8 @@ The 61-scan preprocessed subset used in CS4610 (Fall 2025) and CS4620
 
 ```
 D:/Fall Senior Project/LIDC-exact/
-├── ct/      (61 files, ≈ 2.7 GB)
-└── masks/   (61 files, ≈ 9 MB)
+├── ct/ (61 files, ≈ 2.7 GB)
+└── masks/ (61 files, ≈ 9 MB)
 ```
 
 For an external collaborator to obtain the same subset, contact the

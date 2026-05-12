@@ -40,7 +40,7 @@ python -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA: {
 Expected output:
 ```
 PyTorch: 2.x.x
-CUDA: True  # or False for CPU
+CUDA: True # or False for CPU
 ```
 
 ### 3. Install Dependencies
@@ -81,10 +81,10 @@ You should see:
 
 ```powershell
 # Test model creation
-python -c "from src.models.attention_unet import create_model; print('✓ Models working')"
+python -c "from src.models.attention_unet import create_model; print(' Models working')"
 
 # Test loss functions
-python -c "from src.training.losses import FocalLoss; print('✓ Loss functions working')"
+python -c "from src.training.losses import FocalLoss; print(' Loss functions working')"
 
 # Test dataset
 python src/data/dataset.py
@@ -118,7 +118,7 @@ Press Ctrl+C after 1-2 minutes to stop. If no errors, you're ready!
 **Solution:** Reduce batch size in config file:
 ```yaml
 training:
-  batch_size: 2  # Instead of 4
+ batch_size: 2 # Instead of 4
 ```
 
 ### Issue: "No module named 'src'"
@@ -138,7 +138,7 @@ pip install --upgrade -r requirements.txt
 ```
 
 ### Issue: Slow training on CPU
-**Solution:** 
+**Solution:**
 - Use GPU if available
 - Reduce patch size to 96³
 - Reduce `samples_per_volume` to 2
@@ -169,5 +169,5 @@ If you encounter issues:
 
 ---
 
-**Estimated Setup Time:** 15-30 minutes  
+**Estimated Setup Time:** 15-30 minutes
 **Last Updated:** April 17, 2026

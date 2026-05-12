@@ -209,5 +209,5 @@ Applied during inference:
 
 ---
 
-**Document Version:** 1.0  
+**Document Version:** 1.0
 **Last Updated:** April 17, 2026
