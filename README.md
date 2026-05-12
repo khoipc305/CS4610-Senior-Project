@@ -121,11 +121,37 @@ pip install -r requirements.txt
 ```
 
 ### Dataset Setup
-Link to Fall project data:
+
+The repository ships with a **2-scan smoke-test sample** at
+`dataset/sample/` (~70 MB) that lets you run the deployment app and
+self-tests on any machine without external downloads. All config files
+and CLI scripts default to this sample, using **paths relative to the
+project root**, so a fresh clone works out of the box.
+
+To train or evaluate on the **full LIDC-IDRI dataset**, point the code
+at your own copy. There are three equivalent ways:
+
 ```bash
-# The dataset is in: D:\Fall Senior Project\LIDC-exact\
-# We'll reference it in config files to avoid duplication
+# (a) Override on the command line (one-off)
+python scripts/train.py --config config/config_advanced.yaml \
+    --data_root /path/to/your/LIDC
+
+# (b) Set an environment variable (persistent for one shell)
+# Windows PowerShell:
+$env:LIDC_DATA_ROOT = "D:/path/to/your/LIDC"
+# macOS / Linux:
+export LIDC_DATA_ROOT=/path/to/your/LIDC
+
+# (c) Edit the four `data:` entries in config/config_advanced.yaml
 ```
+
+Whichever location you point at must contain:
+```
+<your_data_root>/
+├── ct/      <- *.nii.gz CT volumes
+└── masks/   <- *_segmask.nii.gz ground-truth masks
+```
+See `dataset/README.md` for how to obtain LIDC-IDRI from TCIA.
 
 ## Alignment with Progress Report 1
 
@@ -168,7 +194,11 @@ python scripts/cross_validate.py --config config/config_advanced.yaml --folds 5
 
 ### 3. Evaluate Model
 ```bash
-python scripts/evaluate.py --model checkpoints/best_model.pth --data_dir "D:/Fall Senior Project/LIDC-exact"
+# Defaults to the bundled smoke-test sample; override with --data_dir.
+python scripts/evaluate.py --model checkpoints/best_model.pth
+
+# Full LIDC dataset (replace path with yours):
+python scripts/evaluate.py --model checkpoints/best_model.pth --data_dir /path/to/your/LIDC
 ```
 
 ### 4. Run Inference

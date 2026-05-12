@@ -10,14 +10,25 @@ experiment:
   gpu_id: 0
   mixed_precision: true  # FP16 training for faster computation
 
-# Data paths (Spring project dataset folder)
+# Data paths
+#
+# All paths below are RELATIVE TO THE PROJECT ROOT (i.e. the folder that
+# contains app.py and this config file). They default to the bundled
+# 2-scan smoke-test sample so that anyone who clones the repository can
+# run the pipeline immediately without modifying paths.
+#
+# To train on the full LIDC-IDRI dataset:
+#   1. Place CT volumes in     <your_data_root>/ct/*.nii.gz
+#   2. Place ground-truth in   <your_data_root>/masks/*_segmask.nii.gz
+#   3. Either edit the four paths below to your absolute or relative
+#      location, OR pass --data_root <path> on the command line.
 data:
-  base_dir: "d:/Spring project/dataset/LIDC"
-  ct_dir: "d:/Spring project/dataset/LIDC/ct/LIDC-exact/ct"
-  mask_dir: "d:/Spring project/dataset/LIDC/mask/masks"
-  manifest_dir: "d:/Spring project/dataset/LIDC/manifests/LIDC-clean"
-  train_manifest: "d:/Spring project/dataset/LIDC/manifests/LIDC-clean/train_manifest.csv"
-  val_manifest: "d:/Spring project/dataset/LIDC/manifests/LIDC-clean/val_manifest.csv"
+  base_dir: "dataset/sample"
+  ct_dir: "dataset/sample/ct"
+  mask_dir: "dataset/sample/masks"
+  manifest_dir: "dataset/sample"
+  train_manifest: "dataset/sample/train_manifest.csv"
+  val_manifest: "dataset/sample/val_manifest.csv"
   cache_dir: "experiments/cache"  # Cache preprocessed data
 
 # Data preprocessing

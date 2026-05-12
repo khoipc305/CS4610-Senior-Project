@@ -274,10 +274,18 @@ if __name__ == "__main__":
     # Test dataset
     print("Testing LIDC Dataset...")
     
-    # Note: Update these paths to actual data
-    manifest = "D:/Fall Senior Project/LIDC-clean/train_manifest.csv"
-    ct_dir = "D:/Fall Senior Project/LIDC-exact/ct"
-    mask_dir = "D:/Fall Senior Project/LIDC-exact/masks"
+    # Default to the bundled smoke-test sample so this self-test runs on any
+    # machine. Override by setting the LIDC_DATA_ROOT environment variable to
+    # a folder that contains ct/ and masks/ sub-folders, e.g.:
+    #     set LIDC_DATA_ROOT=D:/your/path/to/LIDC          (Windows)
+    #     export LIDC_DATA_ROOT=/your/path/to/LIDC        (macOS / Linux)
+    data_root = os.environ.get(
+        "LIDC_DATA_ROOT",
+        os.path.join(os.path.dirname(__file__), "..", "..", "dataset", "sample"),
+    )
+    manifest = os.path.join(data_root, "train_manifest.csv")
+    ct_dir = os.path.join(data_root, "ct")
+    mask_dir = os.path.join(data_root, "masks")
     
     if os.path.exists(manifest):
         dataset = LIDCDataset(

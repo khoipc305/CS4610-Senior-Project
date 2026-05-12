@@ -21,16 +21,27 @@ pip install -r requirements.txt
 
 ### 2. Verify Data Access
 
-The project uses data from your Fall project:
-```
-D:\Fall Senior Project\LIDC-exact\
-├── ct\ # CT scans
-└── masks\ # Segmentation masks
+A 2-scan **smoke-test sample** ships with the repo at
+`dataset/sample/` (~70 MB) and is the default for every config and
+script -- so a fresh clone runs immediately on any machine.
 
-D:\Fall Senior Project\LIDC-clean\
-├── train_manifest.csv
-└── val_manifest.csv
 ```
+dataset/sample/
+├── ct/      # 2 .nii.gz CT volumes
+└── masks/   # 2 matching segmentation masks
+```
+
+For full training/evaluation, point the code at your own copy of
+LIDC-IDRI by setting `LIDC_DATA_ROOT`, passing `--data_root`, or editing
+`config/config_advanced.yaml`. The expected layout is:
+
+```
+<your_data_root>/
+├── ct/      *.nii.gz
+└── masks/   *_segmask.nii.gz
+```
+
+See `dataset/README.md` for download instructions.
 
 ### 3. Train the Model
 
@@ -124,7 +135,7 @@ After training completes:
 
 - Check `README.md` for full documentation
 - See `config/config_advanced.yaml` for all options
-- Review Fall project at `D:\Fall Senior Project\`
+- Review the Fall 2025 baseline write-up in `PROJECT_SUMMARY.md` and `docs/METHODOLOGY.md`
 
 ---
 

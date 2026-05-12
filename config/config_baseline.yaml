@@ -10,12 +10,14 @@ experiment:
   mixed_precision: false
 
 data:
-  base_dir: "d:/Spring project/dataset/LIDC"
-  ct_dir: "d:/Spring project/dataset/LIDC/ct/LIDC-exact/ct"
-  mask_dir: "d:/Spring project/dataset/LIDC/mask/masks"
-  manifest_dir: "d:/Spring project/dataset/LIDC/manifests/LIDC-clean"
-  train_manifest: "d:/Spring project/dataset/LIDC/manifests/LIDC-clean/train_manifest.csv"
-  val_manifest: "d:/Spring project/dataset/LIDC/manifests/LIDC-clean/val_manifest.csv"
+  # Paths are RELATIVE TO THE PROJECT ROOT and default to the bundled
+  # smoke-test sample. See config_advanced.yaml for the override recipe.
+  base_dir: "dataset/sample"
+  ct_dir: "dataset/sample/ct"
+  mask_dir: "dataset/sample/masks"
+  manifest_dir: "dataset/sample"
+  train_manifest: "dataset/sample/train_manifest.csv"
+  val_manifest: "dataset/sample/val_manifest.csv"
 
 preprocessing:
   spacing: [1.5, 1.5, 2.0]

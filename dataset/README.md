@@ -44,16 +44,32 @@ size reasons. Two options to obtain it:
 
 ### Option B — Use the prepared NIfTI subset
 The 61-scan preprocessed subset used in CS4610 (Fall 2025) and CS4620
-(Spring 2026) lives locally at:
+(Spring 2026) is **not** redistributed in this repository. It is held by
+the author and consists of:
 
 ```
-D:/Fall Senior Project/LIDC-exact/
-├── ct/ (61 files, ≈ 2.7 GB)
-└── masks/ (61 files, ≈ 9 MB)
+<author_data_root>/
+├── ct/      (61 files, ≈ 2.7 GB)
+└── masks/   (61 files, ≈ 9 MB)
 ```
 
-For an external collaborator to obtain the same subset, contact the
-author. A Zenodo mirror may be added later.
+To request access (for grading or reproduction), contact
+**khoipc305@cpp.edu**. A Zenodo mirror may be added later. Once you have
+the folder locally, point the codebase at it via any of:
+
+```powershell
+# Windows PowerShell (one shell)
+$env:LIDC_DATA_ROOT = "D:/your/path/to/LIDC"
+```
+```bash
+# macOS / Linux
+export LIDC_DATA_ROOT=/your/path/to/LIDC
+```
+```bash
+# Or per-command override
+python scripts/train.py --config config/config_advanced.yaml \
+    --data_root /your/path/to/LIDC
+```
 
 ## Dataset layout the codebase expects
 

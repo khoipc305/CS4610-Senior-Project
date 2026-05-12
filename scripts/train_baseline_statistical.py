@@ -80,8 +80,11 @@ def main():
                        choices=['logistic', 'random_forest', 'svm', 'all'],
                        help='Model type to train')
     parser.add_argument('--data_dir', type=str,
-                       default='d:/Spring project/dataset/LIDC/ct/LIDC-exact',
-                       help='Data directory')
+                       default='dataset/sample',
+                       help=('Path to a data directory containing ct/ and '
+                             'masks/ sub-folders. Defaults to the bundled '
+                             'smoke-test sample. Override with the full '
+                             'LIDC path to actually train baselines.'))
     parser.add_argument('--output', type=str, default='results/statistical_baseline',
                        help='Output directory')
     
@@ -96,12 +99,13 @@ def main():
     print("(As mentioned in Progress Report 1)")
     print("="*60)
     
-    # Load data
+    # Load data -- everything is resolved relative to --data_dir so this
+    # script is portable across machines.
     data_dir = Path(args.data_dir)
     ct_dir = data_dir / 'ct'
-    mask_dir = 'd:/Spring project/dataset/LIDC/mask/masks'
-    train_manifest = 'd:/Spring project/dataset/LIDC/manifests/LIDC-clean/train_manifest.csv'
-    val_manifest = 'd:/Spring project/dataset/LIDC/manifests/LIDC-clean/val_manifest.csv'
+    mask_dir = data_dir / 'masks'
+    train_manifest = data_dir / 'train_manifest.csv'
+    val_manifest = data_dir / 'val_manifest.csv'
     
     print("\nLoading training data...")
     train_ct_paths, train_mask_paths, train_labels = load_manifest(

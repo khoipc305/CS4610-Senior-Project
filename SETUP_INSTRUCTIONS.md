@@ -59,23 +59,31 @@ This installs:
 
 ### 4. Verify Data Access
 
-Check that Fall project data is accessible:
+The repository ships a 2-scan smoke-test sample under `dataset/sample/`,
+so the deployment app and self-tests run **without any external data**.
+Verify it with:
 
 ```powershell
-# Check CT scans
-dir "D:\Fall Senior Project\LIDC-exact\ct"
-
-# Check masks
-dir "D:\Fall Senior Project\LIDC-exact\masks"
-
-# Check manifests
-dir "D:\Fall Senior Project\LIDC-clean\*.csv"
+dir dataset\sample\ct          # 2 .nii.gz CT volumes (~70 MB total)
+dir dataset\sample\masks       # 2 matching segmentation masks
 ```
 
-You should see:
-- CT directory: ~61 .nii.gz files
-- Masks directory: ~61 .nii.gz files
-- Manifest files: train_manifest.csv, val_manifest.csv
+To train or evaluate on the **full 61-scan LIDC-IDRI dataset**, point the
+code at your local copy. The example paths below are illustrative only --
+substitute your own:
+
+```powershell
+# Example layout (yours can live anywhere):
+dir "C:\path\to\LIDC\ct"        # ~61 .nii.gz CT files
+dir "C:\path\to\LIDC\masks"     # ~61 .nii.gz mask files
+
+# Tell the codebase where your data is (one of the three options):
+$env:LIDC_DATA_ROOT = "C:/path/to/LIDC"     # PowerShell
+# OR pass --data_root <path> on the CLI
+# OR edit config/config_advanced.yaml's `data:` paths
+```
+
+See `dataset/README.md` for how to obtain LIDC-IDRI from TCIA.
 
 ### 5. Test Installation
 

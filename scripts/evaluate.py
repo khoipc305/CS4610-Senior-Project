@@ -131,9 +131,13 @@ def main():
     parser = argparse.ArgumentParser(description='Evaluate trained model')
     parser.add_argument('--model', type=str, required=True,
                        help='Path to model checkpoint')
-    parser.add_argument('--data_dir', type=str, 
-                       default='D:/Fall Senior Project/LIDC-exact',
-                       help='Path to data directory')
+    parser.add_argument('--data_dir', type=str,
+                       default='dataset/sample',
+                       help=('Path to a data directory containing ct/ and '
+                             'masks/ sub-folders. Defaults to the bundled '
+                             '2-scan smoke-test sample. Pass an absolute or '
+                             'relative path to evaluate on the full LIDC '
+                             'dataset, e.g. --data_dir /path/to/LIDC.'))
     parser.add_argument('--output', type=str, default='evaluation_results',
                        help='Output directory for results')
     parser.add_argument('--gpu', type=int, default=0,
