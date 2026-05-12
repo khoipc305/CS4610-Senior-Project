@@ -1,0 +1,184 @@
+# Advanced Configuration for Enhanced Lung Cancer Detection
+# Spring 2026 - Khoi Nguyen Pham
+
+# Experiment
+experiment:
+  name: "lung_cancer_attention_unet"
+  description: "Enhanced 3D U-Net with attention mechanisms and focal loss"
+  seed: 42
+  use_gpu: true
+  gpu_id: 0
+  mixed_precision: true  # FP16 training for faster computation
+
+# Data paths (Spring project dataset folder)
+data:
+  base_dir: "d:/Spring project/dataset/LIDC"
+  ct_dir: "d:/Spring project/dataset/LIDC/ct/LIDC-exact/ct"
+  mask_dir: "d:/Spring project/dataset/LIDC/mask/masks"
+  manifest_dir: "d:/Spring project/dataset/LIDC/manifests/LIDC-clean"
+  train_manifest: "d:/Spring project/dataset/LIDC/manifests/LIDC-clean/train_manifest.csv"
+  val_manifest: "d:/Spring project/dataset/LIDC/manifests/LIDC-clean/val_manifest.csv"
+  cache_dir: "experiments/cache"  # Cache preprocessed data
+
+# Data preprocessing
+preprocessing:
+  spacing: [1.5, 1.5, 2.0]  # Target voxel spacing (mm)
+  orientation: "RAS"  # Right-Anterior-Superior
+  intensity_clip: [-1000, 400]  # HU range for lung tissue
+  normalize: true
+  crop_foreground: true
+  patch_size: [128, 128, 128]  # ENHANCED: Larger patches for more context
+
+# Data augmentation (training only)
+augmentation:
+  enabled: true
+  random_flip_prob: 0.5
+  random_rotate_prob: 0.5
+  random_rotate_range: [-15, 15]  # degrees
+  random_scale_prob: 0.5
+  random_scale_range: [0.9, 1.1]
+  elastic_deform_prob: 0.3  # NEW: Elastic deformations
+  gaussian_noise_prob: 0.2  # NEW: Add noise
+  gaussian_smooth_prob: 0.2  # NEW: Smooth images
+  intensity_shift_prob: 0.3  # NEW: Intensity variations
+  intensity_scale_prob: 0.3
+
+# Sampling strategy
+sampling:
+  positive_negative_ratio: 2.0  # Sample more positive patches
+  samples_per_volume: 4  # Patches per CT scan
+  hard_negative_mining: true  # NEW: Focus on hard examples
+
+# Model architecture
+model:
+  name: "AttentionUNet3D"
+  spatial_dims: 3
+  in_channels: 1
+  out_channels: 2
+  
+  # ENHANCED: Larger capacity
+  channels: [32, 64, 128, 256, 512]
+  strides: [2, 2, 2, 2]
+  
+  # Architecture features
+  num_res_units: 2
+  norm: "BATCH"  # BATCH, INSTANCE, or GROUP
+  dropout: 0.1
+  
+  # NEW: Attention mechanisms
+  use_attention: true
+  attention_type: "spatial"  # spatial, channel, or both
+  
+  # NEW: Deep supervision
+  deep_supervision: true
+  deep_supervision_weights: [0.5, 0.25, 0.125, 0.0625]
+
+# Loss function
+loss:
+  # Primary loss
+  type: "combined"  # focal_dice, tversky, dice_ce, or combined
+  
+  # Loss components and weights
+  focal_loss_weight: 0.5  # NEW: Focal loss for class imbalance
+  dice_loss_weight: 0.3
+  ce_loss_weight: 0.2
+  
+  # Focal loss parameters
+  focal_gamma: 2.0  # Focus on hard examples
+  focal_alpha: 0.75  # Weight for positive class
+  
+  # Tversky parameters (if used)
+  tversky_alpha: 0.7  # False negative weight
+  tversky_beta: 0.3   # False positive weight
+  
+  # Dice parameters
+  dice_smooth: 1e-5
+  dice_squared: false
+
+# Training
+training:
+  epochs: 100
+  batch_size: 4  # ENHANCED: Larger batch size for GPU
+  gradient_accumulation_steps: 2  # Effective batch size: 8
+  
+  # Optimizer
+  optimizer: "AdamW"  # Adam, AdamW, or SGD
+  learning_rate: 1e-4
+  weight_decay: 1e-5
+  
+  # Learning rate scheduler
+  scheduler: "cosine_warmup"  # cosine_warmup, reduce_on_plateau, step
+  warmup_epochs: 5
+  min_lr: 1e-6
+  
+  # For ReduceLROnPlateau
+  lr_patience: 5
+  lr_factor: 0.5
+  
+  # Early stopping
+  early_stopping: true
+  patience: 15
+  min_delta: 0.001
+
+# Validation
+validation:
+  val_interval: 1  # Validate every N epochs
+  val_batch_size: 2
+  save_predictions: true
+  num_samples_to_save: 3
+
+# Checkpointing
+checkpoint:
+  save_interval: 5  # Save every N epochs
+  save_best_only: false  # Also save periodic checkpoints
+  monitor_metric: "val_dice"  # Metric to monitor for best model
+  mode: "max"  # max or min
+
+# Logging
+logging:
+  use_tensorboard: true
+  tensorboard_dir: "experiments/runs"
+  log_interval: 10  # Log every N batches
+  
+  # Optional: Weights & Biases
+  use_wandb: false
+  wandb_project: "lung-cancer-detection"
+  wandb_entity: null
+
+# Evaluation metrics
+metrics:
+  primary: "dice"
+  compute_all: true
+  metrics_list:
+    - "dice"
+    - "iou"
+    - "sensitivity"
+    - "specificity"
+    - "precision"
+    - "hausdorff_distance"
+    - "average_surface_distance"
+
+# Inference
+inference:
+  sliding_window_size: [128, 128, 128]
+  sliding_window_overlap: 0.5
+  use_gaussian_importance: true  # Smooth blending
+  
+  # Post-processing
+  post_processing:
+    enabled: true
+    remove_small_objects: true
+    min_object_size: 10  # voxels
+    morphological_closing: true
+    closing_kernel_size: 3
+
+# Cross-validation (if running cv)
+cross_validation:
+  n_folds: 5
+  stratified: false  # Hard to stratify medical imaging
+  
+# Ensemble (if using multiple models)
+ensemble:
+  enabled: false
+  models: []  # List of model checkpoint paths
+  voting_strategy: "soft"  # soft or hard

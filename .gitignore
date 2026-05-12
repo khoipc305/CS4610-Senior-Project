@@ -1,0 +1,69 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# PyTorch
+*.pth
+*.pt
+
+# Data (large files) -- but allow a small bundled sample under dataset/sample/
+*.nii.gz
+*.dcm
+*.npy
+*.npz
+!dataset/sample/**/*.nii.gz
+
+# Logs and outputs
+experiments/
+checkpoints/
+runs/
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Exclude data directories but keep structure
+LIDC-*/
+*.csv
+!requirements.txt
+
+# Keep important configs and docs
+!config/*.yaml
+!docs/*.md
+!*.md
+
+# -----------------------------------------------------------------------
+# Final overrides: report & presentation artefacts are NOT pushed to GitHub
+# per project instructions. These rules MUST appear after the `!*.md` rule
+# above so they take precedence.
+# -----------------------------------------------------------------------
+report/
+*.pdf
+PRESENTATION_INSTRUCTIONS.md
+ALIGNMENT_WITH_PROGRESS_REPORT.md
